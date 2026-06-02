@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutor Gamer - Seleccionar Nivel</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold:       #f5c842;
+      --gold-dark:  #c9960f;
+      --bg:         #0a0c18;
+      --bg2:        #111427;
+      --bg3:        #181d35;
+      --border:     #252c45;
+      --glow:       #3b4fd8;
+      --txt:        #e8eaf6;
+      --muted:      #7a85a3;
+      --green:      #22c55e;
+      --red:        #ef4444;
+      --blue:       #60a5fa;
+      --purple:     #a78bfa;
+      --teal:       #2dd4bf;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #stars-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+      animation: fadeDown .8s ease both;
+    }
+
+    .header h1 {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(20px, 5vw, 38px);
+      color: var(--gold);
+      text-shadow: 3px 3px 0 var(--gold-dark), 0 0 40px #f5c84260;
+      margin-bottom: 10px;
+    }
+
+    .header p {
+      font-size: 14px;
+      color: var(--purple);
+      letter-spacing: 2px;
+    }
+
+    .stage-selector {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 20px;
+      max-width: 600px;
+      width: 100%;
+      margin-bottom: 50px;
+      animation: fadeUp .9s ease .2s both;
+    }
+
+    .stage-card {
+      background: var(--bg3);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .3s;
+    }
+
+    .stage-card:hover {
+      border-color: var(--glow);
+      transform: translateY(-5px);
+      box-shadow: 0 0 30px #3b4fd840;
+    }
+
+    .stage-card.active {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, #f5c84220, transparent);
+      box-shadow: 0 0 40px #f5c84240;
+    }
+
+    .stage-icon {
+      font-size: 42px;
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .stage-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .stage-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .grades-container {
+      display: none;
+      animation: fadeUp .6s ease both;
+    }
+
+    .grades-container.show {
+      display: block;
+    }
+
+    .grades-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 16px;
+      color: var(--teal);
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .grades-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 15px;
+      max-width: 700px;
+      width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .grade-card {
+      background: var(--bg2);
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      padding: 18px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+    }
+
+    .grade-card:hover {
+      border-color: var(--purple);
+      transform: scale(1.05);
+    }
+
+    .grade-card.selected {
+      border-color: var(--green);
+      background: linear-gradient(135deg, #22c55e20, transparent);
+      box-shadow: 0 0 30px #22c55e40;
+    }
+
+    .grade-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 11px;
+      color: var(--purple);
+      margin-bottom: 8px;
+    }
+
+    .grade-number {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 24px;
+      color: var(--gold);
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      flex-wrap: wrap;
+      animation: fadeUp .9s ease .4s both;
+    }
+
+    .btn {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      padding: 14px 32px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .2s;
+      letter-spacing: 1px;
+      min-width: 140px;
+    }
+
+    .btn-start {
+      background: var(--green);
+      color: #0a0c18;
+      box-shadow: 0 4px 0 #16a34a;
+    }
+
+    .btn-start:hover:not(:disabled) {
+      background: #2dd4a4;
+      box-shadow: 0 6px 0 #16a34a;
+      transform: translateY(-2px);
+    }
+
+    .btn-start:active:not(:disabled) {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #16a34a;
+    }
+
+    .btn-start:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .btn-back {
+      background: var(--muted);
+      color: var(--bg);
+      box-shadow: 0 4px 0 #5a6478;
+    }
+
+    .btn-back:hover {
+      background: #8a95b3;
+      transform: translateY(-2px);
+    }
+
+    .btn-back:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #5a6478;
+    }
+
+    .footer {
+      position: absolute;
+      bottom: 20px;
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .stage-selector {
+        grid-template-columns: 1fr;
+      }
+
+      .grades-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .header h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars-canvas"></canvas>
+
+  <div class="container">
+    <div class="header">
+      <h1>⚔️ SELECCIONA TU NIVEL ⚔️</h1>
+      <p>Elige tu etapa educativa para comenzar</p>
+    </div>
+
+    <div class="stage-selector" id="stageSelector">
+      <div class="stage-card" data-stage="primaria">
+        <span class="stage-icon">📚</span>
+        <div class="stage-title">Primaria</div>
+        <div class="stage-desc">1° a 6° grado</div>
+      </div>
+      <div class="stage-card" data-stage="secundaria">
+        <span class="stage-icon">🎓</span>
+        <div class="stage-title">Secundaria</div>
+        <div class="stage-desc">1° a 3° año</div>
+      </div>
+      <div class="stage-card" data-stage="media">
+        <span class="stage-icon">🚀</span>
+        <div class="stage-title">Media Superior</div>
+        <div class="stage-desc">Nivel avanzado</div>
+      </div>
+    </div>
+
+    <div class="grades-container" id="gradesContainer">
+      <div class="grades-title" id="gradesTitle"></div>
+      <div class="grades-grid" id="gradesGrid"></div>
+    </div>
+
+    <div class="btn-group">
+      <button class="btn btn-start" id="btnStart" disabled>▶ COMENZAR</button>
+      <button class="btn btn-back" id="btnBack" style="display:none;">← ATRÁS</button>
+      <button class="btn btn-back" onclick="window.location.href='index.html'">← INICIO</button>
+    </div>
+
+    <div class="footer">
+      Tutor Gamer · Videojuego Educativo · Powered by Claude AI
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('stars-canvas');
+    const ctx    = canvas.getContext('2d');
+    let stars    = [];
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 160; i++) {
+        stars.push({
+          x:     Math.random() * canvas.width,
+          y:     Math.random() * canvas.height,
+          r:     Math.random() * 1.6 + 0.3,
+          alpha: Math.random(),
+          speed: Math.random() * 0.008 + 0.003,
+          dir:   Math.random() > 0.5 ? 1 : -1
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.alpha += s.speed * s.dir;
+        if (s.alpha >= 1 || s.alpha <= 0) s.dir *= -1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    resize();
+    initStars();
+    drawStars();
+  </script>
+
+  <script>
+    let selectedStage = null;
+    let selectedGrade = null;
+
+    const stages = {
+      primaria: {
+        name: 'Primaria',
+        grades: [
+          { id: 1, label: '1°', fullName: '1° Primaria' },
+          { id: 2, label: '2°', fullName: '2° Primaria' },
+          { id: 3, label: '3°', fullName: '3° Primaria' },
+          { id: 4, label: '4°', fullName: '4° Primaria' },
+          { id: 5, label: '5°', fullName: '5° Primaria' },
+          { id: 6, label: '6°', fullName: '6° Primaria' }
+        ]
+      },
+      secundaria: {
+        name: 'Secundaria',
+        grades: [
+          { id: 7, label: '1°', fullName: '1° Secundaria' }
+        ]
+      },
+      media: {
+        name: 'Media Superior',
+        grades: [
+          { id: 8, label: 'BOSS', fullName: 'Media Superior - BOSS FINAL' }
+        ]
+      }
+    };
+
+    const stageSelector = document.getElementById('stageSelector');
+    const gradesContainer = document.getElementById('gradesContainer');
+    const gradesGrid = document.getElementById('gradesGrid');
+    const gradesTitle = document.getElementById('gradesTitle');
+    const btnStart = document.getElementById('btnStart');
+    const btnBack = document.getElementById('btnBack');
+
+    stageSelector.addEventListener('click', (e) => {
+      const card = e.target.closest('.stage-card');
+      if (!card) return;
+
+      const stage = card.dataset.stage;
+      selectedStage = stage;
+      selectedGrade = null;
+
+      document.querySelectorAll('.stage-card').forEach(c => c.classList.remove('active'));
+      card.classList.add('active');
+
+      showGrades(stage);
+
+      btnBack.style.display = 'inline-block';
+    });
+
+    gradesGrid.addEventListener('click', (e) => {
+      const card = e.target.closest('.grade-card');
+      if (!card) return;
+
+      const gradeId = parseInt(card.dataset.grade);
+      selectedGrade = gradeId;
+
+      document.querySelectorAll('.grade-card').forEach(c => c.classList.remove('selected'));
+      card.classList.add('selected');
+
+      btnStart.disabled = false;
+    });
+
+    btnBack.addEventListener('click', () => {
+      selectedStage = null;
+      selectedGrade = null;
+
+      document.querySelectorAll('.stage-card').forEach(c => c.classList.remove('active'));
+      gradesContainer.classList.remove('show');
+      btnStart.disabled = true;
+      btnBack.style.display = 'none';
+    });
+
+    btnStart.addEventListener('click', () => {
+      if (selectedGrade !== null) {
+        localStorage.setItem('selectedGrade', selectedGrade);
+        window.location.href = 'game.html';
+      }
+    });
+
+    function showGrades(stage) {
+      const stageData = stages[stage];
+      gradesTitle.textContent = `Elige tu grado - ${stageData.name}`;
+      gradesGrid.innerHTML = '';
+
+      stageData.grades.forEach(grade => {
+        const card = document.createElement('div');
+        card.className = 'grade-card';
+        card.dataset.grade = grade.id;
+        card.innerHTML = `
+          <div class="grade-label">${stage.toUpperCase()}</div>
+          <div class="grade-number">${grade.label}</div>
+        `;
+        gradesGrid.appendChild(card);
+      });
+
+      gradesContainer.classList.add('show');
+      btnStart.disabled = true;
+    }
+  </script>
+
+</body>
+</html>
