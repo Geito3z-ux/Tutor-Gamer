@@ -1,0 +1,596 @@
+{
+  "levels": [
+    {
+      "id": 1,
+      "name": "1° Primaria",
+      "monster": "Goblin de la Ignorancia",
+      "monsterImage": "👹",
+      "questions": [
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 2 + 3?",
+          "options": ["4", "5", "6", "7"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 5 - 2?",
+          "options": ["1", "2", "3", "4"],
+          "correct": 2
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuál es la vocal más común?",
+          "options": ["A", "E", "O", "U"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuántas letras tiene la palabra 'GATO'?",
+          "options": ["3", "4", "5", "6"],
+          "correct": 1
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿De qué color es el cielo en el día?",
+          "options": ["Rojo", "Azul", "Verde", "Amarillo"],
+          "correct": 1
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuántas patas tiene un perro?",
+          "options": ["2", "3", "4", "5"],
+          "correct": 2
+        },
+        {
+          "subject": "historia",
+          "question": "¿En qué continente vivimos?",
+          "options": ["Europa", "Asia", "América", "África"],
+          "correct": 2
+        },
+        {
+          "subject": "geografía",
+          "question": "¿Cuál es la capital de España?",
+          "options": ["Barcelona", "Madrid", "Sevilla", "Valencia"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 1 + 1?",
+          "options": ["1", "2", "3", "4"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuántas vocales hay en el alfabeto?",
+          "options": ["3", "4", "5", "6"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "⚠️ PREGUNTA TRAMPA: ¿Cuánto es 10 + 0?",
+          "options": ["0", "1", "10", "20"],
+          "correct": 2
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "name": "2° Primaria",
+      "monster": "Orco del Olvido",
+      "monsterImage": "🗡️👹",
+      "questions": [
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 7 + 5?",
+          "options": ["10", "11", "12", "13"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 15 - 8?",
+          "options": ["5", "6", "7", "8"],
+          "correct": 2
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuántas consonantes tiene 'CASA'?",
+          "options": ["1", "2", "3", "4"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuál es el plural de 'gato'?",
+          "options": ["gatos", "gato", "gatoo", "gatt"],
+          "correct": 0
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuántas patas tiene una araña?",
+          "options": ["4", "6", "8", "10"],
+          "correct": 2
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿De qué se alimenta una oveja?",
+          "options": ["Carne", "Hierba", "Pescado", "Fruta"],
+          "correct": 1
+        },
+        {
+          "subject": "historia",
+          "question": "¿En qué país vivimos?",
+          "options": ["Francia", "España", "Italia", "Portugal"],
+          "correct": 1
+        },
+        {
+          "subject": "geografía",
+          "question": "¿Cuál es la capital de México?",
+          "options": ["Guadalajara", "Ciudad de México", "Cancún", "Acapulco"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 20 - 5?",
+          "options": ["10", "15", "20", "25"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuántas sílabas tiene 'ELEFANTE'?",
+          "options": ["2", "3", "4", "5"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "⚠️ PREGUNTA TRAMPA: ¿Cuánto es 8 + 2?",
+          "options": ["8", "9", "10", "11"],
+          "correct": 2
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "3° Primaria",
+      "monster": "Dragón de la Confusión",
+      "monsterImage": "🐉",
+      "questions": [
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 6 × 3?",
+          "options": ["15", "18", "21", "24"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 24 ÷ 4?",
+          "options": ["4", "5", "6", "8"],
+          "correct": 2
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuál es el antónimo de 'grande'?",
+          "options": ["Pequeño", "Largo", "Alto", "Ancho"],
+          "correct": 0
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuántas letras tiene 'MARIPOSA'?",
+          "options": ["6", "7", "8", "9"],
+          "correct": 2
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuántos lados tiene un triángulo?",
+          "options": ["2", "3", "4", "5"],
+          "correct": 1
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuál es el planeta más cercano al Sol?",
+          "options": ["Venus", "Mercurio", "Tierra", "Marte"],
+          "correct": 1
+        },
+        {
+          "subject": "historia",
+          "question": "¿Quién fue Cristóbal Colón?",
+          "options": ["Un explorador", "Un inventor", "Un escritor", "Un filósofo"],
+          "correct": 0
+        },
+        {
+          "subject": "geografía",
+          "question": "¿Cuál es el río más largo del mundo?",
+          "options": ["Amazonas", "Nilo", "Yangtse", "Mississippi"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 7 × 8?",
+          "options": ["54", "56", "58", "60"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuántas vocales tiene 'EDUCACIÓN'?",
+          "options": ["3", "4", "5", "6"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "⚠️ PREGUNTA TRAMPA: ¿Cuánto es 9 × 9?",
+          "options": ["72", "81", "90", "99"],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "name": "4° Primaria",
+      "monster": "Titán del Caos",
+      "monsterImage": "🦾",
+      "questions": [
+        {
+          "subject": "matemáticas",
+          "question": "Si Juan tiene 12 manzanas y regala 5, ¿cuántas le quedan?",
+          "options": ["6", "7", "8", "9"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 123 + 456?",
+          "options": ["579", "580", "581", "582"],
+          "correct": 0
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuál es el sujeto en la oración 'El gato come pescado'?",
+          "options": ["come", "el gato", "pescado", "come pescado"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Qué es un sustantivo?",
+          "options": ["Acción", "Nombre de personas o cosas", "Adjetivo", "Verbo"],
+          "correct": 1
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuál es la función principal de los pulmones?",
+          "options": ["Bombear sangre", "Intercambiar oxígeno", "Digerir alimentos", "Pensar"],
+          "correct": 1
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿De qué están hechos los huesos principalmente?",
+          "options": ["Grasa", "Calcio", "Agua", "Proteína"],
+          "correct": 1
+        },
+        {
+          "subject": "historia",
+          "question": "¿En qué siglo Colón llegó a América?",
+          "options": ["XV", "XVI", "XVII", "XVIII"],
+          "correct": 0
+        },
+        {
+          "subject": "geografía",
+          "question": "¿Cuál es la capital de Argentina?",
+          "options": ["Córdoba", "Buenos Aires", "Mendoza", "La Plata"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 1/2 + 1/4?",
+          "options": ["1/2", "3/4", "1/4", "1"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuál es el verbo en 'Nosotros jugamos en el parque'?",
+          "options": ["Nosotros", "jugamos", "parque", "en"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "⚠️ PREGUNTA TRAMPA: Una bicicleta cuesta $50 y otra cuesta el doble. ¿Cuánto cuesta la segunda?",
+          "options": ["$50", "$100", "$75", "$150"],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "name": "5° Primaria",
+      "monster": "Leviatán del Saber",
+      "monsterImage": "🐲",
+      "questions": [
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 2/3 + 1/3?",
+          "options": ["1/3", "2/3", "1", "3/3"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 15% de 100?",
+          "options": ["10", "15", "20", "25"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Qué es un adjetivo?",
+          "options": ["Acción", "Palabra que describe", "Nombre", "Verbo"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuántas letras tiene 'INTELIGENCIA'?",
+          "options": ["10", "11", "12", "13"],
+          "correct": 2
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuál es el proceso por el cual las plantas crean su alimento?",
+          "options": ["Respiración", "Fotosíntesis", "Digestión", "Fermentación"],
+          "correct": 1
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuántas capas tiene la Tierra?",
+          "options": ["2", "3", "4", "5"],
+          "correct": 1
+        },
+        {
+          "subject": "historia",
+          "question": "¿Cuál fue el primer imperio de América?",
+          "options": ["Azteca", "Inca", "Maya", "Olmeca"],
+          "correct": 2
+        },
+        {
+          "subject": "geografía",
+          "question": "¿Cuál es el desierto más grande del mundo?",
+          "options": ["Sahara", "Gobi", "Kalahari", "Atacama"],
+          "correct": 0
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuál es el área de un rectángulo de 5cm × 3cm?",
+          "options": ["15 cm²", "16 cm²", "14 cm²", "12 cm²"],
+          "correct": 0
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuál es el sinónimo de 'hermoso'?",
+          "options": ["Feo", "Lindo", "Horrible", "Sucio"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "⚠️ PREGUNTA TRAMPA: ¿Cuánto es 3 × 4 ÷ 2?",
+          "options": ["6", "12", "4", "8"],
+          "correct": 0
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "name": "6° Primaria",
+      "monster": "Archmago de la Obscuridad",
+      "monsterImage": "🧙‍♂️",
+      "questions": [
+        {
+          "subject": "matemáticas",
+          "question": "Si x + 5 = 12, ¿cuál es el valor de x?",
+          "options": ["5", "7", "8", "10"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es el 25% de 80?",
+          "options": ["15", "20", "25", "30"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Qué es la prosa?",
+          "options": ["Poesía", "Forma ordinaria de escribir", "Novela", "Drama"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuántas estrofas tiene un soneto?",
+          "options": ["2", "3", "4", "5"],
+          "correct": 2
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuál es la velocidad del sonido en el aire (aproximada)?",
+          "options": ["100 m/s", "300 m/s", "340 m/s", "500 m/s"],
+          "correct": 2
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuántos huesos tiene el cuerpo humano adulto?",
+          "options": ["186", "206", "226", "246"],
+          "correct": 1
+        },
+        {
+          "subject": "historia",
+          "question": "¿En qué año comenzó la Revolución Francesa?",
+          "options": ["1789", "1799", "1809", "1819"],
+          "correct": 0
+        },
+        {
+          "subject": "geografía",
+          "question": "¿Cuál es la montaña más alta del mundo?",
+          "options": ["K2", "Kilimanjaro", "Everest", "Aconcagua"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuál es el perímetro de un cuadrado de lado 4cm?",
+          "options": ["8 cm", "12 cm", "16 cm", "20 cm"],
+          "correct": 2
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuál es la diferencia entre 'hacer' y 'aser'?",
+          "options": ["Ninguna", "'Hacer' es correcto, 'aser' no", "Son sinónimos", "Depende del contexto"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "⚠️ PREGUNTA TRAMPA: ¿Cuántos lados tiene un hexágono?",
+          "options": ["4", "5", "6", "7"],
+          "correct": 2
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "name": "1° Secundaria",
+      "monster": "Señor de la Oscuridad",
+      "monsterImage": "👹🔥",
+      "questions": [
+        {
+          "subject": "matemáticas",
+          "question": "Resuelve: 2x - 3 = 7. ¿Cuál es x?",
+          "options": ["3", "4", "5", "6"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuál es el resultado de (-3) × (-4)?",
+          "options": ["-12", "12", "-1", "1"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Qué es una metáfora?",
+          "options": ["Pregunta retórica", "Comparación sin 'como'", "Exageración", "Repetición"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Quién escribió 'Don Quijote'?",
+          "options": ["Lope de Vega", "Cervantes", "Calderón", "Góngora"],
+          "correct": 1
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuál es la fórmula del agua?",
+          "options": ["H₂O", "CO₂", "H₂O₂", "NaCl"],
+          "correct": 0
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Qué es la fotosíntesis en términos simples?",
+          "options": ["Respiración de plantas", "Proceso de crear energía con luz", "Movimiento de agua", "Crecimiento de raíces"],
+          "correct": 1
+        },
+        {
+          "subject": "historia",
+          "question": "¿En qué siglo ocurrió la Edad Media?",
+          "options": ["IX-XV", "V-XV", "X-XVI", "VI-XIV"],
+          "correct": 1
+        },
+        {
+          "subject": "geografía",
+          "question": "¿Cuál es el continente más poblado?",
+          "options": ["África", "Europa", "Asia", "América"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es 3/4 × 2/3?",
+          "options": ["1/2", "2/4", "1/4", "5/12"],
+          "correct": 0
+        },
+        {
+          "subject": "español",
+          "question": "¿Qué tipo de palabra es 'correr'?",
+          "options": ["Sustantivo", "Adjetivo", "Verbo", "Adverbio"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "⚠️ PREGUNTA TRAMPA: ¿Cuál es la raíz cuadrada de 16?",
+          "options": ["2", "4", "8", "16"],
+          "correct": 1
+        }
+      ]
+    },
+    {
+      "id": 8,
+      "name": "Media Superior",
+      "monster": "Demonio del Conocimiento",
+      "monsterImage": "👿⚡",
+      "questions": [
+        {
+          "subject": "matemáticas",
+          "question": "Resuelve: x² - 5x + 6 = 0. ¿Cuáles son las soluciones?",
+          "options": ["x=2, x=3", "x=1, x=4", "x=0, x=5", "x=-2, x=-3"],
+          "correct": 0
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuál es el resultado de log₂(8)?",
+          "options": ["1", "2", "3", "4"],
+          "correct": 2
+        },
+        {
+          "subject": "español",
+          "question": "¿Qué es un oxímoron?",
+          "options": ["Pregunta sin respuesta", "Contrarios juntos", "Palabra compuesta", "Frase hecha"],
+          "correct": 1
+        },
+        {
+          "subject": "español",
+          "question": "¿Cuál es la obra maestra de García Lorca?",
+          "options": ["La casa de Bernarda Alba", "Bodas de sangre", "Yerma", "Mariana Pineda"],
+          "correct": 0
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuál es la ecuación fundamental de la física?",
+          "options": ["E=mc²", "F=ma", "V=IR", "P=mgh"],
+          "correct": 0
+        },
+        {
+          "subject": "ciencias",
+          "question": "¿Cuál es el número de Avogadro?",
+          "options": ["6.02 × 10²²", "6.02 × 10²³", "6.02 × 10²⁴", "6.02 × 10²¹"],
+          "correct": 1
+        },
+        {
+          "subject": "historia",
+          "question": "¿En qué año terminó la Segunda Guerra Mundial?",
+          "options": ["1943", "1944", "1945", "1946"],
+          "correct": 2
+        },
+        {
+          "subject": "geografía",
+          "question": "¿Cuál es el país más grande del mundo por área?",
+          "options": ["Canadá", "China", "Rusia", "Australia"],
+          "correct": 2
+        },
+        {
+          "subject": "matemáticas",
+          "question": "¿Cuánto es el seno de 90°?",
+          "options": ["0", "0.5", "1", "-1"],
+          "correct": 2
+        },
+        {
+          "subject": "español",
+          "question": "¿Quién es el autor de '100 años de soledad'?",
+          "options": ["Pablo Coelho", "Gabriel García Márquez", "Jorge Luis Borges", "Julio Cortázar"],
+          "correct": 1
+        },
+        {
+          "subject": "matemáticas",
+          "question": "⚠️ PREGUNTA TRAMPA: ¿Cuál es la derivada de x²?",
+          "options": ["x", "2x", "2", "x³"],
+          "correct": 1
+        }
+      ]
+    }
+  ]
+}
