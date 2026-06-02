@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutor Gamer - Juego</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold:       #f5c842;
+      --gold-dark:  #c9960f;
+      --bg:         #0a0c18;
+      --bg2:        #111427;
+      --bg3:        #181d35;
+      --border:     #252c45;
+      --glow:       #3b4fd8;
+      --txt:        #e8eaf6;
+      --muted:      #7a85a3;
+      --green:      #22c55e;
+      --red:        #ef4444;
+      --blue:       #60a5fa;
+      --purple:     #a78bfa;
+      --teal:       #2dd4bf;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #stars-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .game-container {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .game-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 30px;
+      padding: 20px;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .game-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(14px, 3vw, 24px);
+      color: var(--gold);
+      text-shadow: 0 0 20px #f5c84240;
+    }
+
+    .stats {
+      display: flex;
+      gap: 20px;
+      font-size: 12px;
+      flex-wrap: wrap;
+    }
+
+    .stat {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .stat-label {
+      color: var(--muted);
+    }
+
+    .stat-value {
+      color: var(--gold);
+      font-weight: 900;
+      font-size: 14px;
+    }
+
+    .game-area {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 30px;
+      margin-bottom: 30px;
+      flex: 1;
+    }
+
+    .monster-panel {
+      background: var(--bg2);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .monster-name {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 14px;
+      color: var(--red);
+      margin-bottom: 15px;
+    }
+
+    .monster-image {
+      font-size: 80px;
+      margin-bottom: 20px;
+      animation: monsterBounce 2s infinite;
+    }
+
+    @keyframes monsterBounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .monster-hp-bar {
+      width: 100%;
+      height: 30px;
+      background: var(--bg3);
+      border: 2px solid var(--red);
+      border-radius: 5px;
+      overflow: hidden;
+      margin-top: 20px;
+    }
+
+    .monster-hp-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #ef4444, #ff6b6b);
+      width: 100%;
+      transition: width .5s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-size: 10px;
+    }
+
+    .player-panel {
+      background: var(--bg2);
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .question-box {
+      background: var(--bg3);
+      border: 1px solid var(--glow);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+
+    .question-subject {
+      font-size: 10px;
+      color: var(--teal);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 10px;
+    }
+
+    .question-text {
+      font-size: 16px;
+      color: var(--txt);
+      line-height: 1.6;
+      margin-bottom: 15px;
+    }
+
+    .question-number {
+      font-size: 10px;
+      color: var(--muted);
+    }
+
+    .options {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 10px;
+    }
+
+    .option {
+      background: var(--bg3);
+      border: 2px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 18px;
+      cursor: pointer;
+      transition: all .2s;
+      font-size: 13px;
+      text-align: left;
+    }
+
+    .option:hover {
+      border-color: var(--glow);
+      background: #1a2240;
+    }
+
+    .option.correct {
+      border-color: var(--green);
+      background: #1a3020;
+      color: var(--green);
+    }
+
+    .option.incorrect {
+      border-color: var(--red);
+      background: #2a1a1a;
+      color: var(--red);
+    }
+
+    .option:disabled {
+      cursor: not-allowed;
+      opacity: 0.7;
+    }
+
+    .loading {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      animation: fadeIn .5s ease;
+    }
+
+    .loading h2 {
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .spinner {
+      border: 3px solid var(--border);
+      border-top: 3px solid var(--gold);
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      animation: spin 1s linear infinite;
+      margin: 0 auto;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @media (max-width: 768px) {
+      .game-area {
+        grid-template-columns: 1fr;
+      }
+
+      .stats {
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .game-header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars-canvas"></canvas>
+
+  <div class="game-container">
+    <div class="game-header">
+      <div class="game-title">⚔️ COMBATE ⚔️</div>
+      <div class="stats">
+        <div class="stat">
+          <span class="stat-label">❤️ VIDAS:</span>
+          <span class="stat-value" id="livesDisplay">5</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">⚡ NIVEL:</span>
+          <span class="stat-value" id="levelDisplay">1</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">🔥 COMBO:</span>
+          <span class="stat-value" id="comboDisplay">0</span>
+        </div>
+        <div class="stat">
+          <span class="stat-label">📊 PREGUNTA:</span>
+          <span class="stat-value" id="questionDisplay">1/11</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="game-area">
+      <div class="monster-panel">
+        <div class="monster-name" id="monsterName">Enemigo</div>
+        <div class="monster-image" id="monsterImage">👹</div>
+        <div class="monster-hp-bar">
+          <div class="monster-hp-fill" id="monsterHp" style="width: 100%;">
+            <span id="monsterHpText">100/100</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="player-panel">
+        <div class="question-box">
+          <div class="question-subject" id="subject">MATEMÁTICAS</div>
+          <div class="question-text" id="question">¿Cargando pregunta...?</div>
+          <div class="question-number" id="questionNum">Pregunta 1 de 11</div>
+        </div>
+        <div class="options" id="options">
+          <div class="option">Cargando...</div>
+        </div>
+        <div class="loading" id="loading">
+          <h2>Procesando...</h2>
+          <div class="spinner"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('stars-canvas');
+    const ctx    = canvas.getContext('2d');
+    let stars    = [];
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 160; i++) {
+        stars.push({
+          x:     Math.random() * canvas.width,
+          y:     Math.random() * canvas.height,
+          r:     Math.random() * 1.6 + 0.3,
+          alpha: Math.random(),
+          speed: Math.random() * 0.008 + 0.003,
+          dir:   Math.random() > 0.5 ? 1 : -1
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.alpha += s.speed * s.dir;
+        if (s.alpha >= 1 || s.alpha <= 0) s.dir *= -1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    resize();
+    initStars();
+    drawStars();
+  </script>
+
+  <script>
+    let gameState = {
+      selectedGrade: parseInt(localStorage.getItem('selectedGrade')) || 1,
+      currentLevel: 0,
+      currentQuestion: 0,
+      lives: 5,
+      combo: 0,
+      monsterHP: 100,
+      monsterMaxHP: 100,
+      questionsData: [],
+      answered: false,
+      selectedAnswer: null,
+      scores: {}
+    };
+
+    const DOM = {
+      livesDisplay: document.getElementById('livesDisplay'),
+      levelDisplay: document.getElementById('levelDisplay'),
+      comboDisplay: document.getElementById('comboDisplay'),
+      questionDisplay: document.getElementById('questionDisplay'),
+      monsterName: document.getElementById('monsterName'),
+      monsterImage: document.getElementById('monsterImage'),
+      monsterHp: document.getElementById('monsterHp'),
+      monsterHpText: document.getElementById('monsterHpText'),
+      subject: document.getElementById('subject'),
+      question: document.getElementById('question'),
+      questionNum: document.getElementById('questionNum'),
+      options: document.getElementById('options'),
+      loading: document.getElementById('loading')
+    };
+
+    async function loadQuestionsData() {
+      try {
+        const response = await fetch('data/questions.json');
+        gameState.questionsData = await response.json();
+      } catch (error) {
+        console.error('Error loading questions:', error);
+        DOM.question.textContent = 'Error al cargar las preguntas';
+      }
+    }
+
+    function displayQuestion() {
+      const level = gameState.questionsData.levels[gameState.currentLevel];
+      const question = level.questions[gameState.currentQuestion];
+
+      DOM.subject.textContent = `${question.subject.toUpperCase()}`;
+      DOM.question.textContent = question.question;
+      DOM.questionNum.textContent = `Pregunta ${gameState.currentQuestion + 1} de ${level.questions.length}`;
+      DOM.questionDisplay.textContent = `${gameState.currentQuestion + 1}/${level.questions.length}`;
+
+      DOM.monsterName.textContent = level.monster;
+      DOM.monsterImage.textContent = level.monsterImage;
+
+      renderOptions(question);
+      gameState.answered = false;
+      gameState.selectedAnswer = null;
+    }
+
+    function renderOptions(question) {
+      DOM.options.innerHTML = '';
+      question.options.forEach((option, index) => {
+        const btn = document.createElement('button');
+        btn.className = 'option';
+        btn.textContent = option;
+        btn.dataset.index = index;
+        btn.disabled = gameState.answered;
+        btn.addEventListener('click', () => answerQuestion(index, question));
+        DOM.options.appendChild(btn);
+      });
+    }
+
+    function answerQuestion(selectedIndex, question) {
+      if (gameState.answered) return;
+
+      gameState.answered = true;
+      gameState.selectedAnswer = selectedIndex;
+
+      const options = document.querySelectorAll('.option');
+      const isCorrect = selectedIndex === question.correct;
+
+      options.forEach((btn, index) => {
+        btn.disabled = true;
+        if (index === question.correct) {
+          btn.classList.add('correct');
+        } else if (index === selectedIndex && !isCorrect) {
+          btn.classList.add('incorrect');
+        }
+      });
+
+      const subject = question.subject;
+      if (!gameState.scores[subject]) {
+        gameState.scores[subject] = { correct: 0, total: 0 };
+      }
+      gameState.scores[subject].total++;
+
+      if (isCorrect) {
+        const damage = 15 + (gameState.combo * 5);
+        gameState.monsterHP = Math.max(0, gameState.monsterHP - damage);
+        gameState.combo++;
+        gameState.scores[subject].correct++;
+      } else {
+        gameState.lives--;
+        gameState.combo = 0;
+      }
+
+      updateDisplay();
+
+      if (gameState.lives === 0) {
+        setTimeout(() => {
+          alert('💀 ¡GAME OVER! Se acabaron tus vidas.');
+          window.location.href = 'selection.html';
+        }, 1500);
+        return;
+      }
+
+      if (gameState.monsterHP === 0) {
+        setTimeout(() => {
+          nextQuestion();
+        }, 1500);
+      } else {
+        setTimeout(() => {
+          nextQuestion();
+        }, 1500);
+      }
+    }
+
+    function nextQuestion() {
+      const level = gameState.questionsData.levels[gameState.currentLevel];
+      gameState.currentQuestion++;
+
+      if (gameState.currentQuestion >= level.questions.length) {
+        if (gameState.currentLevel >= gameState.questionsData.levels.length - 1) {
+          localStorage.setItem('finalStats', JSON.stringify({
+            lives: gameState.lives,
+            combo: gameState.combo,
+            completedLevels: gameState.currentLevel + 1,
+            scores: gameState.scores
+          }));
+          window.location.href = 'results.html';
+        } else {
+          gameState.currentLevel++;
+          gameState.currentQuestion = 0;
+          gameState.monsterHP = 100;
+          gameState.monsterMaxHP = 100;
+        }
+      }
+
+      displayQuestion();
+    }
+
+    function updateDisplay() {
+      DOM.livesDisplay.textContent = gameState.lives;
+      DOM.levelDisplay.textContent = gameState.currentLevel + 1;
+      DOM.comboDisplay.textContent = gameState.combo;
+
+      const hpPercent = (gameState.monsterHP / gameState.monsterMaxHP) * 100;
+      DOM.monsterHp.style.width = hpPercent + '%';
+      DOM.monsterHpText.textContent = `${gameState.monsterHP}/${gameState.monsterMaxHP}`;
+    }
+
+    (async () => {
+      await loadQuestionsData();
+      if (gameState.questionsData.levels) {
+        displayQuestion();
+        updateDisplay();
+      }
+    })();
+  </script>
+
+</body>
+</html>
