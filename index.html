@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutor Gamer - Índice de Inicio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ================================================
+       VARIABLES Y RESET
+    ================================================ */
+    :root {
+      --gold:       #f5c842;
+      --gold-dark:  #c9960f;
+      --bg:         #0a0c18;
+      --bg2:        #111427;
+      --bg3:        #181d35;
+      --border:     #252c45;
+      --glow:       #3b4fd8;
+      --txt:        #e8eaf6;
+      --muted:      #7a85a3;
+      --green:      #22c55e;
+      --red:        #ef4444;
+      --blue:       #60a5fa;
+      --purple:     #a78bfa;
+      --teal:       #2dd4bf;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ================================================
+       FONDO ESTRELLADO ANIMADO
+    ================================================ */
+    #stars-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ================================================
+       PANTALLA PRINCIPAL
+    ================================================ */
+    #intro {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 20px;
+      gap: 0;
+    }
+
+    /* ================================================
+       LOGO / TÍTULO
+    ================================================ */
+    .logo-wrap {
+      text-align: center;
+      margin-bottom: 10px;
+      animation: fadeDown .8s ease both;
+    }
+
+    .logo-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(22px, 5vw, 40px);
+      color: var(--gold);
+      text-shadow:
+        3px 3px 0 var(--gold-dark),
+        0 0 40px #f5c84260;
+      line-height: 1.5;
+      letter-spacing: 2px;
+    }
+
+    .logo-sub {
+      font-size: clamp(11px, 2vw, 14px);
+      color: var(--purple);
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-top: 10px;
+    }
+
+    /* ================================================
+       HÉROE ANIMADO (SVG)
+    ================================================ */
+    .hero-wrap {
+      width: clamp(130px, 22vw, 190px);
+      height: clamp(130px, 22vw, 190px);
+      margin: 18px 0;
+      animation: heroFloat 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 24px #3b4fd870);
+    }
+
+    @keyframes heroFloat {
+      0%, 100% { transform: translateY(0px);   }
+      50%       { transform: translateY(-14px); }
+    }
+
+    /* ================================================
+       PANEL DE HISTORIA / INTRO
+    ================================================ */
+    .story-panel {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 28px;
+      max-width: 560px;
+      width: 100%;
+      margin-bottom: 28px;
+      position: relative;
+      animation: fadeUp .9s ease .3s both;
+    }
+
+    .story-panel::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: 15px;
+      background: linear-gradient(135deg, #3b4fd840, transparent 60%);
+      pointer-events: none;
+    }
+
+    .story-label {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 10px;
+      color: var(--teal);
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .story-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    .story-text {
+      font-size: 14px;
+      color: var(--txt);
+      line-height: 1.9;
+      text-align: center;
+    }
+
+    .story-text span {
+      color: var(--gold);
+      font-weight: 900;
+    }
+
+    /* ================================================
+       REGLAS RÁPIDAS (ICONOS)
+    ================================================ */
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px;
+      max-width: 560px;
+      width: 100%;
+      margin-bottom: 30px;
+      animation: fadeUp .9s ease .5s both;
+    }
+
+    .rule-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 14px 10px;
+      text-align: center;
+      transition: border-color .2s, transform .2s;
+    }
+
+    .rule-card:hover {
+      border-color: var(--glow);
+      transform: translateY(-3px);
+    }
+
+    .rule-icon {
+      font-size: 28px;
+      display: block;
+      margin-bottom: 8px;
+    }
+
+    .rule-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 8px;
+      color: var(--gold);
+      margin-bottom: 5px;
+      line-height: 1.6;
+    }
+
+    .rule-desc {
+      font-size: 11px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ================================================
+       BOTÓN JUGAR
+    ================================================ */
+    .btn-play-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      animation: fadeUp .9s ease .7s both;
+    }
+
+    .btn-play {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(13px, 2.5vw, 17px);
+      color: #1a1200;
+      background: var(--gold);
+      border: none;
+      border-radius: 8px;
+      padding: 18px 48px;
+      cursor: pointer;
+      box-shadow: 0 6px 0 var(--gold-dark), 0 0 30px #f5c84240;
+      transition: all .15s;
+      letter-spacing: 1px;
+    }
+
+    .btn-play:hover {
+      background: #ffd94d;
+      box-shadow: 0 6px 0 var(--gold-dark), 0 0 50px #f5c84260;
+      transform: translateY(-2px);
+    }
+
+    .btn-play:active {
+      transform: translateY(4px);
+      box-shadow: 0 2px 0 var(--gold-dark);
+    }
+
+    .btn-hint {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 1px;
+      animation: blink 2s infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1;   }
+      50%       { opacity: 0.3; }
+    }
+
+    /* ================================================
+       BARRA DE MATERIAS (decorativa)
+    ================================================ */
+    .subjects-bar {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 24px;
+      animation: fadeUp .9s ease .9s both;
+    }
+
+    .subj-pill {
+      font-size: 11px;
+      font-weight: 800;
+      padding: 5px 14px;
+      border-radius: 20px;
+      border: 1px solid;
+    }
+
+    .pill-mat { background: #1a3020; color: var(--green);  border-color: #22c55e40; }
+    .pill-his { background: #2a1a40; color: var(--purple); border-color: #a78bfa40; }
+    .pill-geo { background: #0f2020; color: var(--teal);   border-color: #2dd4bf40; }
+    .pill-esp { background: #2a1a00; color: var(--gold);   border-color: #f5c84240; }
+    .pill-cie { background: #0a1a2a; color: var(--blue);   border-color: #60a5fa40; }
+
+    /* ================================================
+       FOOTER
+    ================================================ */
+    .footer {
+      margin-top: 28px;
+      font-size: 10px;
+      color: var(--muted);
+      text-align: center;
+      animation: fadeUp .9s ease 1s both;
+    }
+
+    /* ================================================
+       ANIMACIONES GLOBALES
+    ================================================ */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to   { opacity: 1; transform: translateY(0);     }
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0);    }
+    }
+
+  </style>
+</head>
+<body>
+
+  <!-- FONDO ESTRELLADO -->
+  <canvas id="stars-canvas"></canvas>
+
+  <!-- PANTALLA DE INICIO -->
+  <main id="intro">
+
+    <!-- TÍTULO -->
+    <div class="logo-wrap">
+      <div class="logo-title">⚔️ TUTOR GAMER ⚔️</div>
+      <div class="logo-sub">RPG Educativo — Aprende y Conquista</div>
+    </div>
+
+    <!-- HÉROE SVG ANIMADO -->
+    <div class="hero-wrap">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Aura exterior -->
+        <circle cx="100" cy="100" r="95" fill="#0d1030" stroke="#3b4fd8" stroke-width="2"/>
+        <circle cx="100" cy="100" r="90" fill="none" stroke="#3b4fd820" stroke-width="1"/>
+        <!-- Capa -->
+        <path d="M65 95 Q58 130 62 158 Q80 150 74 128 L74 95Z" fill="#1e2a80"/>
+        <path d="M135 95 Q142 130 138 158 Q120 150 126 128 L126 95Z" fill="#1e2a80"/>
+        <!-- Cuerpo armadura -->
+        <rect x="72" y="92" width="56" height="58" rx="6" fill="#2d3fb5"/>
+        <rect x="80" y="110" width="12" height="18" rx="2" fill="#1e2a80"/>
+        <rect x="108" y="110" width="12" height="18" rx="2" fill="#1e2a80"/>
+        <rect x="92" y="92" width="16" height="8" rx="2" fill="#3b4fd8"/>
+        <!-- Cinturón -->
+        <rect x="72" y="138" width="56" height="10" rx="3" fill="#1a2070"/>
+        <rect x="96" y="139" width="8" height="8" rx="2" fill="#f5c842"/>
+        <!-- Hombros -->
+        <rect x="60" y="90" width="20" height="14" rx="5" fill="#3b4fd8"/>
+        <rect x="120" y="90" width="20" height="14" rx="5" fill="#3b4fd8"/>
+        <!-- Cabeza -->
+        <circle cx="100" cy="68" r="26" fill="#fde68a"/>
+        <!-- Casco -->
+        <path d="M74 66 Q74 38 100 34 Q126 38 126 66 L120 62 Q118 46 100 42 Q82 46 80 62Z" fill="#2d3fb5"/>
+        <rect x="94" y="34" width="12" height="10" rx="2" fill="#60a5fa"/>
+        <rect x="74" y="60" width="10" height="14" rx="2" fill="#2d3fb5"/>
+        <rect x="116" y="60" width="10" height="14" rx="2" fill="#2d3fb5"/>
+        <!-- Ojos -->
+        <ellipse cx="91" cy="70" rx="4" ry="4.5" fill="#1a1a2e"/>
+        <ellipse cx="109" cy="70" rx="4" ry="4.5" fill="#1a1a2e"/>
+        <circle cx="92.5" cy="68.5" r="1.5" fill="white"/>
+        <circle cx="110.5" cy="68.5" r="1.5" fill="white"/>
+        <!-- Boca -->
+        <path d="M93 78 Q100 83 107 78" stroke="#c9960f" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <!-- Espada -->
+        <rect x="130" y="50" width="6" height="82" rx="2" fill="#94a3b8"/>
+        <rect x="121" y="86" width="24" height="8" rx="2" fill="#f5c842"/>
+        <rect x="132" y="40" width="4" height="16" rx="2" fill="#cbd5e1"/>
+        <ellipse cx="134" cy="38" rx="4" ry="5" fill="#f5c842"/>
+        <!-- Escudo -->
+        <path d="M48 83 L68 83 L68 118 Q58 128 48 118Z" fill="#1e3a8a" stroke="#60a5fa" stroke-width="2"/>
+        <path d="M54 91 L62 91 L62 111 Q58 117 54 111Z" fill="#1e2a80"/>
+        <text x="58" y="106" font-size="14" text-anchor="middle" fill="#60a5fa" font-weight="bold">✦</text>
+        <!-- Destellos decorativos -->
+        <circle cx="40"  cy="40"  r="3" fill="#f5c842" opacity=".7"/>
+        <circle cx="160" cy="35"  r="2" fill="#60a5fa" opacity=".7"/>
+        <circle cx="170" cy="150" r="3" fill="#a78bfa" opacity=".7"/>
+        <circle cx="30"  cy="160" r="2" fill="#2dd4bf" opacity=".7"/>
+      </svg>
+    </div>
+
+    <!-- HISTORIA -->
+    <div class="story-panel">
+      <div class="story-label">📖 Historia</div>
+      <p class="story-text">
+        El reino del saber está en peligro.<br>
+        <span>Monstruos del Olvido</span> han invadido las tierras del conocimiento.<br><br>
+        Solo un héroe capaz de responder los desafíos académicos podrá derrotarlos.<br><br>
+        Cada <span>respuesta correcta</span> es un golpe al enemigo.<br>
+        Cada <span>error</span> te cuesta una vida.<br><br>
+        ¿Tienes el conocimiento para salvar el reino?
+      </p>
+    </div>
+
+    <!-- REGLAS RÁPIDAS -->
+    <div class="rules-grid">
+      <div class="rule-card">
+        <span class="rule-icon">❤️</span>
+        <div class="rule-title">5 VIDAS</div>
+        <div class="rule-desc">Cada error te quita 1 vida. ¡No las pierdas todas!</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">⚔️</span>
+        <div class="rule-title">ATACA</div>
+        <div class="rule-desc">Respuesta correcta = daño al monstruo enemigo.</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">🔥</span>
+        <div class="rule-title">COMBOS</div>
+        <div class="rule-desc">Aciertos seguidos multiplican el daño que haces.</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">⚠️</span>
+        <div class="rule-title">TRAMPA</div>
+        <div class="rule-desc">1 pregunta trampa por nivel. ¡Cuidado con el engaño!</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">👑</span>
+        <div class="rule-title">JEFE FINAL</div>
+        <div class="rule-desc">El nivel 6 es el más difícil. El dragón te espera.</div>
+      </div>
+      <div class="rule-card">
+        <span class="rule-icon">📊</span>
+        <div class="rule-title">PERFIL</div>
+        <div class="rule-desc">Al final verás tu boleta con dominio por materia.</div>
+      </div>
+    </div>
+
+    <!-- BOTÓN JUGAR -->
+    <div class="btn-play-wrap">
+      <button class="btn-play" onclick="window.location.href='selection.html'">
+        ▶ COMENZAR AVENTURA
+      </button>
+      <span class="btn-hint">— Presiona para empezar —</span>
+    </div>
+
+    <!-- MATERIAS -->
+    <div class="subjects-bar">
+      <span class="subj-pill pill-mat">➗ Matemáticas</span>
+      <span class="subj-pill pill-his">📜 Historia</span>
+      <span class="subj-pill pill-geo">🌎 Geografía</span>
+      <span class="subj-pill pill-esp">✍️ Español</span>
+      <span class="subj-pill pill-cie">🔬 Ciencias</span>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      Tutor Gamer &nbsp;·&nbsp; Videojuego Educativo &nbsp;·&nbsp; Powered by Claude AI
+    </div>
+
+  </main>
+
+  <!-- ESTRELLAS ANIMADAS (Canvas JS) -->
+  <script>
+    const canvas = document.getElementById('stars-canvas');
+    const ctx    = canvas.getContext('2d');
+    let stars    = [];
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 160; i++) {
+        stars.push({
+          x:     Math.random() * canvas.width,
+          y:     Math.random() * canvas.height,
+          r:     Math.random() * 1.6 + 0.3,
+          alpha: Math.random(),
+          speed: Math.random() * 0.008 + 0.003,
+          dir:   Math.random() > 0.5 ? 1 : -1
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.alpha += s.speed * s.dir;
+        if (s.alpha >= 1 || s.alpha <= 0) s.dir *= -1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    resize();
+    initStars();
+    drawStars();
+  </script>
+
+</body>
+</html>
