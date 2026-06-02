@@ -387,10 +387,15 @@
       combo: 0,
       monsterHP: 100,
       monsterMaxHP: 100,
-      questionsData: [],
+      questionsData: null,
       answered: false,
       selectedAnswer: null,
       scores: {}
+    };
+
+    // Mapeo de grado seleccionado (1-8) a índice del nivel (0-7)
+    const gradeToLevelIndex = {
+      1: 0, 2: 1, 3: 2, 4: 3, 5: 4, 6: 5, 7: 6, 8: 7
     };
 
     const DOM = {
@@ -413,15 +418,39 @@
       try {
         const response = await fetch('data/questions.json');
         gameState.questionsData = await response.json();
+        console.log('Preguntas cargadas:', gameState.questionsData);
+        console.log('Grado seleccionado:', gameState.selectedGrade);
+        console.log('Índice de nivel:', gradeToLevelIndex[gameState.selectedGrade]);
       } catch (error) {
         console.error('Error loading questions:', error);
         DOM.question.textContent = 'Error al cargar las preguntas';
       }
     }
 
+    function getLevelIndex() {
+      return gradeToLevelIndex[gameState.selectedGrade] || 0;
+    }
+
     function displayQuestion() {
-      const level = gameState.questionsData.levels[gameState.currentLevel];
+      if (!gameState.questionsData || !gameState.questionsData.levels) {
+        console.error('No hay datos de preguntas');
+        return;
+      }
+
+      const levelIndex = getLevelIndex();
+      const level = gameState.questionsData.levels[levelIndex];
+      
+      if (!level) {
+        console.error('Nivel no encontrado:', levelIndex);
+        return;
+      }
+
       const question = level.questions[gameState.currentQuestion];
+
+      if (!question) {
+        console.error('Pregunta no encontrada:', gameState.currentQuestion);
+        return;
+      }
 
       DOM.subject.textContent = `${question.subject.toUpperCase()}`;
       DOM.question.textContent = question.question;
@@ -505,32 +534,27 @@
     }
 
     function nextQuestion() {
-      const level = gameState.questionsData.levels[gameState.currentLevel];
+      const levelIndex = getLevelIndex();
+      const level = gameState.questionsData.levels[levelIndex];
       gameState.currentQuestion++;
 
       if (gameState.currentQuestion >= level.questions.length) {
-        if (gameState.currentLevel >= gameState.questionsData.levels.length - 1) {
-          localStorage.setItem('finalStats', JSON.stringify({
-            lives: gameState.lives,
-            combo: gameState.combo,
-            completedLevels: gameState.currentLevel + 1,
-            scores: gameState.scores
-          }));
-          window.location.href = 'results.html';
-        } else {
-          gameState.currentLevel++;
-          gameState.currentQuestion = 0;
-          gameState.monsterHP = 100;
-          gameState.monsterMaxHP = 100;
-        }
+        localStorage.setItem('finalStats', JSON.stringify({
+          lives: gameState.lives,
+          combo: gameState.combo,
+          completedLevels: 1,
+          scores: gameState.scores
+        }));
+        window.location.href = 'results.html';
+      } else {
+        displayQuestion();
       }
-
-      displayQuestion();
     }
 
     function updateDisplay() {
+      const levelIndex = getLevelIndex();
       DOM.livesDisplay.textContent = gameState.lives;
-      DOM.levelDisplay.textContent = gameState.currentLevel + 1;
+      DOM.levelDisplay.textContent = levelIndex + 1;
       DOM.comboDisplay.textContent = gameState.combo;
 
       const hpPercent = (gameState.monsterHP / gameState.monsterMaxHP) * 100;
@@ -540,9 +564,12 @@
 
     (async () => {
       await loadQuestionsData();
-      if (gameState.questionsData.levels) {
+      if (gameState.questionsData && gameState.questionsData.levels) {
         displayQuestion();
         updateDisplay();
+      } else {
+        console.error('Error: No se pudieron cargar las preguntas');
+        DOM.question.textContent = '❌ Error al cargar las preguntas. Recarga la página.';
       }
     })();
   </script>
