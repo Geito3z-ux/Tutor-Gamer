@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tutor Gamer - Resultados</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Nunito:wght@400;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --gold:       #f5c842;
+      --gold-dark:  #c9960f;
+      --bg:         #0a0c18;
+      --bg2:        #111427;
+      --bg3:        #181d35;
+      --border:     #252c45;
+      --glow:       #3b4fd8;
+      --txt:        #e8eaf6;
+      --muted:      #7a85a3;
+      --green:      #22c55e;
+      --red:        #ef4444;
+      --blue:       #60a5fa;
+      --purple:     #a78bfa;
+      --teal:       #2dd4bf;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Nunito', sans-serif;
+      background: var(--bg);
+      color: var(--txt);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    #stars-canvas {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      min-height: 100vh;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .results-panel {
+      background: var(--bg2);
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      padding: 40px;
+      max-width: 700px;
+      width: 100%;
+      text-align: center;
+      animation: slideUp .8s ease;
+    }
+
+    .results-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: clamp(24px, 5vw, 40px);
+      color: var(--gold);
+      text-shadow: 0 0 40px #f5c84240;
+      margin-bottom: 20px;
+    }
+
+    .victory-icon {
+      font-size: 80px;
+      animation: bounce 2s infinite;
+      margin-bottom: 20px;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
+    .results-subtitle {
+      font-size: 16px;
+      color: var(--purple);
+      margin-bottom: 30px;
+      letter-spacing: 1px;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 15px;
+      margin-bottom: 30px;
+    }
+
+    .stat-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .stat-card.epic {
+      border-color: var(--gold);
+      background: linear-gradient(135deg, #f5c84220, transparent);
+    }
+
+    .stat-number {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 28px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 11px;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .scores-section {
+      margin-top: 40px;
+      text-align: left;
+      padding-top: 30px;
+      border-top: 1px solid var(--border);
+    }
+
+    .scores-title {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 16px;
+      color: var(--teal);
+      text-align: center;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+    }
+
+    .score-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 15px;
+      background: var(--bg3);
+      border-radius: 8px;
+      margin-bottom: 10px;
+      border-left: 4px solid var(--glow);
+    }
+
+    .score-subject {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .score-subject-name {
+      font-weight: 700;
+      font-size: 14px;
+    }
+
+    .score-subject-icon {
+      font-size: 20px;
+    }
+
+    .score-percentage {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 14px;
+      color: var(--green);
+    }
+
+    .progress-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      margin-top: 8px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--green), var(--teal));
+      transition: width .8s ease;
+    }
+
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      font-family: 'Press Start 2P', monospace;
+      font-size: 12px;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all .2s;
+      letter-spacing: 1px;
+    }
+
+    .btn-play {
+      background: var(--green);
+      color: var(--bg);
+      box-shadow: 0 4px 0 #16a34a;
+    }
+
+    .btn-play:hover {
+      background: #2dd4a4;
+      transform: translateY(-2px);
+    }
+
+    .btn-play:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #16a34a;
+    }
+
+    .btn-home {
+      background: var(--blue);
+      color: var(--bg);
+      box-shadow: 0 4px 0 #0284c7;
+    }
+
+    .btn-home:hover {
+      background: #93c5fd;
+      transform: translateY(-2px);
+    }
+
+    .btn-home:active {
+      transform: translateY(2px);
+      box-shadow: 0 2px 0 #0284c7;
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .results-panel {
+        padding: 30px 20px;
+      }
+
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .btn-group {
+        flex-direction: column;
+      }
+
+      .btn {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <canvas id="stars-canvas"></canvas>
+
+  <div class="container">
+    <div class="results-panel">
+      <div class="victory-icon">🏆</div>
+      <div class="results-title">¡VICTORIA!</div>
+      <div class="results-subtitle">Completaste todos los niveles</div>
+
+      <div class="stats-grid">
+        <div class="stat-card epic">
+          <div class="stat-number" id="livesRemaining">5</div>
+          <div class="stat-label">❤️ Vidas</div>
+        </div>
+        <div class="stat-card epic">
+          <div class="stat-number" id="levelsClear">8</div>
+          <div class="stat-label">⚡ Niveles</div>
+        </div>
+        <div class="stat-card epic">
+          <div class="stat-number" id="maxCombo">15</div>
+          <div class="stat-label">🔥 Max Combo</div>
+        </div>
+      </div>
+
+      <div class="scores-section">
+        <div class="scores-title">📊 DOMINIO POR MATERIA</div>
+        <div id="scoresContainer"></div>
+      </div>
+
+      <div class="btn-group">
+        <button class="btn btn-play" onclick="window.location.href='selection.html'">
+          ▶ JUGAR DE NUEVO
+        </button>
+        <button class="btn btn-home" onclick="window.location.href='index.html'">
+          🏠 INICIO
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('stars-canvas');
+    const ctx    = canvas.getContext('2d');
+    let stars    = [];
+
+    function resize() {
+      canvas.width  = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+
+    function initStars() {
+      stars = [];
+      for (let i = 0; i < 160; i++) {
+        stars.push({
+          x:     Math.random() * canvas.width,
+          y:     Math.random() * canvas.height,
+          r:     Math.random() * 1.6 + 0.3,
+          alpha: Math.random(),
+          speed: Math.random() * 0.008 + 0.003,
+          dir:   Math.random() > 0.5 ? 1 : -1
+        });
+      }
+    }
+
+    function drawStars() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      stars.forEach(s => {
+        s.alpha += s.speed * s.dir;
+        if (s.alpha >= 1 || s.alpha <= 0) s.dir *= -1;
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(255,255,255,${s.alpha})`;
+        ctx.fill();
+      });
+      requestAnimationFrame(drawStars);
+    }
+
+    window.addEventListener('resize', () => { resize(); initStars(); });
+    resize();
+    initStars();
+    drawStars();
+  </script>
+
+  <script>
+    const subjectIcons = {
+      'Matemáticas': '➗',
+      'Historia': '📜',
+      'Geografía': '🌎',
+      'Español': '✍️',
+      'Ciencias': '🔬'
+    };
+
+    const colors = {
+      'Matemáticas': '#22c55e',
+      'Historia': '#a78bfa',
+      'Geografía': '#2dd4bf',
+      'Español': '#f5c842',
+      'Ciencias': '#60a5fa'
+    };
+
+    function displayResults() {
+      const statsString = localStorage.getItem('finalStats');
+      if (!statsString) {
+        window.location.href = 'index.html';
+        return;
+      }
+
+      const stats = JSON.parse(statsString);
+
+      document.getElementById('livesRemaining').textContent = stats.lives;
+      document.getElementById('levelsClear').textContent = stats.completedLevels;
+      document.getElementById('maxCombo').textContent = stats.combo;
+
+      const scoresContainer = document.getElementById('scoresContainer');
+      scoresContainer.innerHTML = '';
+
+      const subjects = Object.keys(stats.scores || {});
+      subjects.forEach(subject => {
+        const data = stats.scores[subject];
+        const percentage = Math.round((data.correct / data.total) * 100);
+
+        const scoreItem = document.createElement('div');
+        scoreItem.className = 'score-item';
+        scoreItem.style.borderLeftColor = colors[subject] || '#60a5fa';
+
+        scoreItem.innerHTML = `
+          <div class="score-subject">
+            <span class="score-subject-icon">${subjectIcons[subject] || '📚'}</span>
+            <span class="score-subject-name">${subject}</span>
+          </div>
+          <div style="flex: 1; margin: 0 20px;">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: ${percentage}%; background: linear-gradient(90deg, ${colors[subject]}, ${colors[subject]});"></div>
+            </div>
+          </div>
+          <div class="score-percentage">${percentage}%</div>
+        `;
+
+        scoresContainer.appendChild(scoreItem);
+      });
+
+      localStorage.removeItem('finalStats');
+    }
+
+    displayResults();
+  </script>
+
+</body>
+</html>
