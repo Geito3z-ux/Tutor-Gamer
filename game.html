@@ -414,11 +414,193 @@
       loading: document.getElementById('loading')
     };
 
+    // DATOS EMBEBIDOS - Ya no necesita fetch
+    const QUESTIONS_DATA = {
+      "levels": [
+        {
+          "id": 1,
+          "name": "1° Primaria",
+          "type": "primaria",
+          "grade": 1,
+          "monster": "Goblin de Sumas",
+          "monsterImage": "🐢",
+          "difficulty": "Muy Fácil",
+          "questions": [
+            {"id": 1, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 2 + 3?", "options": ["4", "5", "6", "7"], "correct": 1, "difficulty": "fácil"},
+            {"id": 2, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 5 - 2?", "options": ["2", "3", "4", "5"], "correct": 1, "difficulty": "fácil"},
+            {"id": 3, "subject": "Historia", "type": "normal", "question": "¿En qué continente vivimos?", "options": ["Asia", "América", "Europa", "África"], "correct": 1, "difficulty": "fácil"},
+            {"id": 4, "subject": "Geografía", "type": "normal", "question": "¿Cuál es la capital de tu país?", "options": ["Ciudad de México", "Madrid", "Bogotá", "Lima"], "correct": 0, "difficulty": "fácil"},
+            {"id": 5, "subject": "Español", "type": "normal", "question": "¿Cuál es el singular de 'gatos'?", "options": ["gato", "gata", "gatos", "gatitos"], "correct": 0, "difficulty": "fácil"},
+            {"id": 6, "subject": "Ciencias", "type": "normal", "question": "¿Los perros son animales...?", "options": ["domésticos", "salvajes", "acuáticos", "voladores"], "correct": 0, "difficulty": "fácil"},
+            {"id": 7, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 1 + 1?", "options": ["1", "2", "3", "4"], "correct": 1, "difficulty": "fácil"},
+            {"id": 8, "subject": "Historia", "type": "normal", "question": "¿Cuántas estaciones tiene el año?", "options": ["2", "3", "4", "5"], "correct": 2, "difficulty": "fácil"},
+            {"id": 9, "subject": "Geografía", "type": "normal", "question": "¿Cuántos continentes hay?", "options": ["5", "6", "7", "8"], "correct": 2, "difficulty": "fácil"},
+            {"id": 10, "subject": "Español", "type": "normal", "question": "¿Cuántas vocales tiene el alfabeto?", "options": ["3", "4", "5", "6"], "correct": 2, "difficulty": "fácil"},
+            {"id": 11, "subject": "Ciencias", "type": "trap", "question": "¿Los peces respiran con pulmones como los humanos?", "options": ["Sí, igual que nosotros", "No, respiran con branquias", "A veces", "Los peces no respiran"], "correct": 1, "difficulty": "trampa", "trapExplanation": "¡Trampa! Los peces respiran con branquias, no con pulmones."}
+          ]
+        },
+        {
+          "id": 2,
+          "name": "2° Primaria",
+          "type": "primaria",
+          "grade": 2,
+          "monster": "Orco de Restas",
+          "monsterImage": "👹",
+          "difficulty": "Fácil",
+          "questions": [
+            {"id": 1, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 7 + 5?", "options": ["11", "12", "13", "14"], "correct": 1, "difficulty": "fácil"},
+            {"id": 2, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 15 - 8?", "options": ["6", "7", "8", "9"], "correct": 1, "difficulty": "fácil"},
+            {"id": 3, "subject": "Historia", "type": "normal", "question": "¿Cuántos meses tiene un año?", "options": ["10", "11", "12", "13"], "correct": 2, "difficulty": "fácil"},
+            {"id": 4, "subject": "Geografía", "type": "normal", "question": "¿Cuál es el océano más grande?", "options": ["Atlántico", "Índico", "Pacífico", "Ártico"], "correct": 2, "difficulty": "fácil"},
+            {"id": 5, "subject": "Español", "type": "normal", "question": "¿Cuántas letras tiene la palabra 'escuela'?", "options": ["6", "7", "8", "9"], "correct": 1, "difficulty": "fácil"},
+            {"id": 6, "subject": "Ciencias", "type": "normal", "question": "¿El agua se congela a cuántos grados?", "options": ["0°C", "10°C", "100°C", "50°C"], "correct": 0, "difficulty": "fácil"},
+            {"id": 7, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 3 × 2?", "options": ["5", "6", "7", "8"], "correct": 1, "difficulty": "fácil"},
+            {"id": 8, "subject": "Historia", "type": "normal", "question": "¿Cuántas semanas tiene un mes aproximadamente?", "options": ["2", "3", "4", "5"], "correct": 2, "difficulty": "fácil"},
+            {"id": 9, "subject": "Geografía", "type": "normal", "question": "¿En qué hemisferio vivimos?", "options": ["Norte", "Sur", "Este", "Oeste"], "correct": 0, "difficulty": "fácil"},
+            {"id": 10, "subject": "Español", "type": "normal", "question": "¿Cuál es el verbo en esta oración: 'El niño corre rápido'?", "options": ["niño", "corre", "rápido", "el"], "correct": 1, "difficulty": "fácil"},
+            {"id": 11, "subject": "Ciencias", "type": "trap", "question": "¿El corazón es un hueso?", "options": ["Sí, es un hueso muy duro", "No, es un músculo", "Es mitad hueso, mitad músculo", "El corazón no existe"], "correct": 1, "difficulty": "trampa", "trapExplanation": "¡Trampa! El corazón es un músculo, no un hueso."}
+          ]
+        },
+        {
+          "id": 3,
+          "name": "3° Primaria",
+          "type": "primaria",
+          "grade": 3,
+          "monster": "Trol de Multiplicación",
+          "monsterImage": "🗿",
+          "difficulty": "Normal",
+          "questions": [
+            {"id": 1, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 6 × 7?", "options": ["40", "42", "44", "46"], "correct": 1, "difficulty": "medio"},
+            {"id": 2, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 48 ÷ 6?", "options": ["6", "7", "8", "9"], "correct": 2, "difficulty": "medio"},
+            {"id": 3, "subject": "Historia", "type": "normal", "question": "¿En qué siglo vivimos actualmente?", "options": ["XX", "XXI", "XIX", "XVIII"], "correct": 1, "difficulty": "medio"},
+            {"id": 4, "subject": "Geografía", "type": "normal", "question": "¿Cuál es el río más largo del mundo?", "options": ["Amazonas", "Nilo", "Yangtsé", "Misisipi"], "correct": 1, "difficulty": "medio"},
+            {"id": 5, "subject": "Español", "type": "normal", "question": "¿Cuál es el antónimo de 'grande'?", "options": ["pequeño", "largo", "ancho", "alto"], "correct": 0, "difficulty": "medio"},
+            {"id": 6, "subject": "Ciencias", "type": "normal", "question": "¿Cuántos huesos tiene el cuerpo humano adulto?", "options": ["186", "206", "226", "246"], "correct": 1, "difficulty": "medio"},
+            {"id": 7, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 25 + 38?", "options": ["61", "62", "63", "64"], "correct": 2, "difficulty": "medio"},
+            {"id": 8, "subject": "Historia", "type": "normal", "question": "¿Cuántos presidentes hay en el mundo aproximadamente?", "options": ["100", "150", "193", "250"], "correct": 2, "difficulty": "medio"},
+            {"id": 9, "subject": "Geografía", "type": "normal", "question": "¿Cuál es la montaña más alta del mundo?", "options": ["K2", "Monte Everest", "Aconcagua", "Denali"], "correct": 1, "difficulty": "medio"},
+            {"id": 10, "subject": "Español", "type": "normal", "question": "¿Cuál es el sinónimo de 'bonito'?", "options": ["feo", "hermoso", "malo", "triste"], "correct": 1, "difficulty": "medio"},
+            {"id": 11, "subject": "Ciencias", "type": "trap", "question": "¿La velocidad del sonido es más rápida que la luz?", "options": ["Sí, mucho más rápida", "No, la luz es más rápida", "Son iguales", "El sonido no viaja"], "correct": 1, "difficulty": "trampa", "trapExplanation": "¡Trampa! La luz viaja mucho más rápido que el sonido."}
+          ]
+        },
+        {
+          "id": 4,
+          "name": "4° Primaria",
+          "type": "primaria",
+          "grade": 4,
+          "monster": "Dragón de Fracciones",
+          "monsterImage": "🐉",
+          "difficulty": "Difícil",
+          "questions": [
+            {"id": 1, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 1/2 + 1/4?", "options": ["1/6", "2/6", "3/4", "1/3"], "correct": 2, "difficulty": "difícil"},
+            {"id": 2, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 12 × 15?", "options": ["160", "170", "180", "190"], "correct": 2, "difficulty": "difícil"},
+            {"id": 3, "subject": "Historia", "type": "normal", "question": "¿En qué año llegó Cristóbal Colón a América?", "options": ["1491", "1492", "1493", "1494"], "correct": 1, "difficulty": "difícil"},
+            {"id": 4, "subject": "Geografía", "type": "normal", "question": "¿Cuántos países hay en Europa?", "options": ["40", "44", "50", "55"], "correct": 1, "difficulty": "difícil"},
+            {"id": 5, "subject": "Español", "type": "normal", "question": "¿Cuál es el objeto directo en: 'Juan compró un libro'?", "options": ["Juan", "compró", "un libro", "libro"], "correct": 2, "difficulty": "difícil"},
+            {"id": 6, "subject": "Ciencias", "type": "normal", "question": "¿Cuál es el gas más abundante en la atmósfera?", "options": ["Oxígeno", "Nitrógeno", "Dióxido de carbono", "Helio"], "correct": 1, "difficulty": "difícil"},
+            {"id": 7, "subject": "Matemáticas", "type": "normal", "question": "Si tengo 50 manzanas y doy 15, ¿cuántas me quedan?", "options": ["30", "35", "40", "45"], "correct": 1, "difficulty": "difícil"},
+            {"id": 8, "subject": "Historia", "type": "normal", "question": "¿En qué año cayó el Muro de Berlín?", "options": ["1987", "1988", "1989", "1990"], "correct": 2, "difficulty": "difícil"},
+            {"id": 9, "subject": "Geografía", "type": "normal", "question": "¿Cuál es la capital de Japón?", "options": ["Kioto", "Osaka", "Tokio", "Nagoya"], "correct": 2, "difficulty": "difícil"},
+            {"id": 10, "subject": "Español", "type": "normal", "question": "¿Cuál es la forma correcta: 'habían' o 'avían'?", "options": ["habían", "avían", "ambas", "ninguna"], "correct": 0, "difficulty": "difícil"},
+            {"id": 11, "subject": "Ciencias", "type": "trap", "question": "¿Las bacterias siempre son dañinas para los humanos?", "options": ["Sí, todas son peligrosas", "No, algunas son beneficiosas", "Las bacterias no existen", "Solo las nuevas son dañinas"], "correct": 1, "difficulty": "trampa", "trapExplanation": "¡Trampa! No todas las bacterias son dañinas."}
+          ]
+        },
+        {
+          "id": 5,
+          "name": "5° Primaria",
+          "type": "primaria",
+          "grade": 5,
+          "monster": "Fénix de Geometría",
+          "monsterImage": "🔥",
+          "difficulty": "Muy Difícil",
+          "questions": [
+            {"id": 1, "subject": "Matemáticas", "type": "normal", "question": "¿Cuál es el área de un cuadrado con lado de 5 cm?", "options": ["20 cm²", "25 cm²", "30 cm²", "35 cm²"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 2, "subject": "Matemáticas", "type": "normal", "question": "¿Cuánto es 144 ÷ 12?", "options": ["10", "11", "12", "13"], "correct": 2, "difficulty": "muy difícil"},
+            {"id": 3, "subject": "Historia", "type": "normal", "question": "¿En qué siglo fue la Revolución Francesa?", "options": ["XVI", "XVII", "XVIII", "XIX"], "correct": 2, "difficulty": "muy difícil"},
+            {"id": 4, "subject": "Geografía", "type": "normal", "question": "¿Cuál es la ciudad más poblada del mundo?", "options": ["Nueva York", "Tokio", "Bombay", "Estambul"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 5, "subject": "Español", "type": "normal", "question": "¿Cuál es el predicado en: 'El gato come pescado'?", "options": ["El gato", "come pescado", "gato", "pescado"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 6, "subject": "Ciencias", "type": "normal", "question": "¿Cuál es el planeta más cercano al Sol?", "options": ["Venus", "Mercurio", "Tierra", "Marte"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 7, "subject": "Matemáticas", "type": "normal", "question": "Si un artículo cuesta $100 y tiene 20% de descuento, ¿cuál es el precio final?", "options": ["$70", "$75", "$80", "$85"], "correct": 2, "difficulty": "muy difícil"},
+            {"id": 8, "subject": "Historia", "type": "normal", "question": "¿En qué año terminó la Segunda Guerra Mundial?", "options": ["1943", "1944", "1945", "1946"], "correct": 2, "difficulty": "muy difícil"},
+            {"id": 9, "subject": "Geografía", "type": "normal", "question": "¿Cuál es el desierto más grande del mundo?", "options": ["Kalahari", "Sahara", "Atacama", "Mojave"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 10, "subject": "Español", "type": "normal", "question": "¿Qué es una metáfora?", "options": ["Una comparación", "Una expresión figurada", "Una rima", "Un verso"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 11, "subject": "Ciencias", "type": "trap", "question": "¿El hierro es más denso que el agua?", "options": ["No, flota en el agua", "Sí, se hunde en el agua", "Depende del agua", "El hierro no existe"], "correct": 1, "difficulty": "trampa", "trapExplanation": "¡Trampa! El hierro es más denso que el agua."}
+          ]
+        },
+        {
+          "id": 6,
+          "name": "6° Primaria",
+          "type": "primaria",
+          "grade": 6,
+          "monster": "Titán de Problemas",
+          "monsterImage": "💀",
+          "difficulty": "Épico",
+          "questions": [
+            {"id": 1, "subject": "Matemáticas", "type": "normal", "question": "Si Juan tiene 3 veces más dinero que Pedro, y Pedro tiene $50, ¿cuánto tiene Juan?", "options": ["$100", "$150", "$200", "$250"], "correct": 2, "difficulty": "épico"},
+            {"id": 2, "subject": "Matemáticas", "type": "normal", "question": "¿Cuál es el resultado de √144?", "options": ["10", "11", "12", "13"], "correct": 2, "difficulty": "épico"},
+            {"id": 3, "subject": "Historia", "type": "normal", "question": "¿Quién fue el primer presidente de Estados Unidos?", "options": ["Thomas Jefferson", "George Washington", "Abraham Lincoln", "Benjamin Franklin"], "correct": 1, "difficulty": "épico"},
+            {"id": 4, "subject": "Geografía", "type": "normal", "question": "¿Cuántos países hay en el mundo aproximadamente?", "options": ["150", "175", "195", "220"], "correct": 2, "difficulty": "épico"},
+            {"id": 5, "subject": "Español", "type": "normal", "question": "¿Cuál es el género de la palabra 'problema'?", "options": ["Femenino", "Masculino", "Neutro", "Ambiguo"], "correct": 1, "difficulty": "épico"},
+            {"id": 6, "subject": "Ciencias", "type": "normal", "question": "¿Cuántos elementos tiene la tabla periódica actualmente?", "options": ["90", "100", "118", "150"], "correct": 2, "difficulty": "épico"},
+            {"id": 7, "subject": "Matemáticas", "type": "normal", "question": "¿Cuál es el perímetro de un rectángulo con lados de 4 y 6 cm?", "options": ["16 cm", "18 cm", "20 cm", "24 cm"], "correct": 2, "difficulty": "épico"},
+            {"id": 8, "subject": "Historia", "type": "normal", "question": "¿En qué año comenzó la Guerra de Independencia americana?", "options": ["1774", "1775", "1776", "1777"], "correct": 2, "difficulty": "épico"},
+            {"id": 9, "subject": "Geografía", "type": "normal", "question": "¿Cuál es la velocidad aproximada de rotación de la Tierra?", "options": ["100 km/h", "500 km/h", "1667 km/h", "5000 km/h"], "correct": 2, "difficulty": "épico"},
+            {"id": 10, "subject": "Español", "type": "normal", "question": "¿Cuál es el complemento indirecto en: 'Le di un regalo a María'?", "options": ["un regalo", "a María", "Le", "regalo"], "correct": 2, "difficulty": "épico"},
+            {"id": 11, "subject": "Ciencias", "type": "trap", "question": "¿El corazón es el órgano más importante del cuerpo?", "options": ["Sí, es el más importante", "No, el cerebro es más importante", "Ambos son igual de importantes", "El estómago es más importante"], "correct": 2, "difficulty": "trampa", "trapExplanation": "¡Trampa! Tanto el corazón como el cerebro son críticos."}
+          ]
+        },
+        {
+          "id": 7,
+          "name": "1° Secundaria",
+          "type": "secundaria",
+          "grade": 7,
+          "monster": "Lich de Álgebra",
+          "monsterImage": "👻",
+          "difficulty": "Muy Difícil",
+          "questions": [
+            {"id": 1, "subject": "Matemáticas", "type": "normal", "question": "Resuelve: 2x + 5 = 13. ¿Cuál es el valor de x?", "options": ["2", "3", "4", "5"], "correct": 2, "difficulty": "muy difícil"},
+            {"id": 2, "subject": "Matemáticas", "type": "normal", "question": "¿Cuál es el resultado de (3 + 2)²?", "options": ["20", "25", "30", "35"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 3, "subject": "Historia", "type": "normal", "question": "¿Quién escribió 'Don Quijote'?", "options": ["Lope de Vega", "Miguel de Cervantes", "Federico García Lorca", "Jorge Luis Borges"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 4, "subject": "Geografía", "type": "normal", "question": "¿Cuál es la capital de Suiza?", "options": ["Zúrich", "Berna", "Ginebra", "Basilea"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 5, "subject": "Español", "type": "normal", "question": "¿Cuál es la forma correcta del subjuntivo de 'ser'?", "options": ["seré", "sea", "soy", "era"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 6, "subject": "Ciencias", "type": "normal", "question": "¿Cuál es la fórmula para calcular la velocidad?", "options": ["v = d × t", "v = d / t", "v = d + t", "v = d - t"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 7, "subject": "Matemáticas", "type": "normal", "question": "¿Cuál es la raíz cuadrada de 169?", "options": ["11", "12", "13", "14"], "correct": 2, "difficulty": "muy difícil"},
+            {"id": 8, "subject": "Historia", "type": "normal", "question": "¿En qué año se firmó la Declaración de Independencia de Estados Unidos?", "options": ["1774", "1775", "1776", "1777"], "correct": 2, "difficulty": "muy difícil"},
+            {"id": 9, "subject": "Geografía", "type": "normal", "question": "¿Cuál es el lago más grande del mundo?", "options": ["Mar Caspio", "Lago Baikal", "Gran Lago del Oso", "Lago Victoria"], "correct": 0, "difficulty": "muy difícil"},
+            {"id": 10, "subject": "Español", "type": "normal", "question": "¿Cuál es el significado de 'diáfano'?", "options": ["Opaco", "Transparente", "Oscuro", "Colorido"], "correct": 1, "difficulty": "muy difícil"},
+            {"id": 11, "subject": "Ciencias", "type": "trap", "question": "¿La energía puede ser creada de la nada?", "options": ["Sí, se crea constantemente", "No, solo se transforma", "Sí, en el espacio", "Depende del tipo de energía"], "correct": 1, "difficulty": "trampa", "trapExplanation": "¡Trampa! La energía no se crea ni se destruye, solo se transforma."}
+          ]
+        },
+        {
+          "id": 8,
+          "name": "Media Superior",
+          "type": "media",
+          "grade": 10,
+          "monster": "Demonio del Cálculo",
+          "monsterImage": "😈",
+          "difficulty": "BOSS FINAL",
+          "isBoss": true,
+          "questions": [
+            {"id": 1, "subject": "Matemáticas", "type": "normal", "question": "Resuelve el sistema: x + y = 5, x - y = 1. ¿Cuál es el valor de x?", "options": ["2", "3", "4", "5"], "correct": 1, "difficulty": "épico"},
+            {"id": 2, "subject": "Matemáticas", "type": "normal", "question": "¿Cuál es el resultado de log₁₀(100)?", "options": ["1", "2", "10", "100"], "correct": 1, "difficulty": "épico"},
+            {"id": 3, "subject": "Historia", "type": "normal", "question": "¿Quién fue el filósofo que dijo 'Pienso, luego existo'?", "options": ["Platón", "Aristóteles", "René Descartes", "Immanuel Kant"], "correct": 2, "difficulty": "épico"},
+            {"id": 4, "subject": "Geografía", "type": "normal", "question": "¿Cuál es la capital de Rusia?", "options": ["San Petersburgo", "Moscú", "Novosibirsk", "Yekaterinburgo"], "correct": 1, "difficulty": "épico"},
+            {"id": 5, "subject": "Español", "type": "normal", "question": "¿Quién es el autor de 'Cien años de soledad'?", "options": ["Jorge Luis Borges", "Gabriel García Márquez", "Julio Cortázar", "Pablo Neruda"], "correct": 1, "difficulty": "épico"},
+            {"id": 6, "subject": "Ciencias", "type": "normal", "question": "¿Cuál es la velocidad de la luz aproximadamente?", "options": ["300,000 km/s", "150,000 km/s", "500,000 km/s", "1,000,000 km/s"], "correct": 0, "difficulty": "épico"},
+            {"id": 7, "subject": "Matemáticas", "type": "normal", "question": "¿Cuál es el resultado de (x + 3)² cuando x = 2?", "options": ["20", "25", "30", "35"], "correct": 1, "difficulty": "épico"},
+            {"id": 8, "subject": "Historia", "type": "normal", "question": "¿En qué año cayó el imperio romano de occidente?", "options": ["410 d.C.", "476 d.C.", "500 d.C.", "550 d.C."], "correct": 1, "difficulty": "épico"},
+            {"id": 9, "subject": "Geografía", "type": "normal", "question": "¿Cuál es el continente más poblado?", "options": ["Europa", "América", "Asia", "África"], "correct": 2, "difficulty": "épico"},
+            {"id": 10, "subject": "Español", "type": "normal", "question": "¿Cuál es el movimiento literario de 'El Quijote'?", "options": ["Realismo", "Surrealismo", "Barroco", "Romántico"], "correct": 2, "difficulty": "épico"},
+            {"id": 11, "subject": "Ciencias", "type": "trap", "question": "¿El universo es estático e inmóvil?", "options": ["Sí, siempre ha sido igual", "No, está en expansión", "Sí, pero solo localmente", "No, está colapsando"], "correct": 1, "difficulty": "trampa", "trapExplanation": "¡Trampa! El universo NO es estático, está en expansión."}
+          ]
+        }
+      ]
+    };
+
     async function loadQuestionsData() {
       try {
-        const response = await fetch('data/questions.json');
-        gameState.questionsData = await response.json();
-        console.log('Preguntas cargadas:', gameState.questionsData);
+        gameState.questionsData = QUESTIONS_DATA;
+        console.log('✅ Preguntas cargadas correctamente');
         console.log('Grado seleccionado:', gameState.selectedGrade);
         console.log('Índice de nivel:', gradeToLevelIndex[gameState.selectedGrade]);
       } catch (error) {
